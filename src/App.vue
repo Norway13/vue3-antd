@@ -1,30 +1,66 @@
 <template>
   <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <router-link v-for="(item, index) in arr" :to="item.path" :key="index">{{ item.name }}</router-link>
+
   </div>
-  <router-view/>
+  <div class="main">
+    <router-view />
+  </div>
 </template>
+<script setup> 
+const arr = [
+  {
+    name: 'home',
+    path: '/'
+  },
+  {
+    name: '泳道图',
+    path: '/flow'
+  },
+  {
+    name: '泳道图',
+    path: '/flow1'
+  },
+  {
+    name: '南京流程',
+    path: '/flow2'
+  },
+  {
+    name: '表单basic',
+    path: '/form'
+  },
+]
+</script>
 
 <style lang="less">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
 #nav {
-  padding: 30px;
+  width: 100%;
+  height: 40px;
+  display: flex;
+  padding-left: 10px;
+  align-items: center;
+  background-color: #f1f1f1;
 
   a {
     font-weight: bold;
     color: #2c3e50;
+    margin-right: 10px;
 
     &.router-link-exact-active {
       color: #42b983;
     }
   }
+}
+
+.main {
+  width: 100%;
+  height: calc(100% - 40px);
+
+  &>div {
+    width: 100%;
+    height: 100%;
+
+  }
+
 }
 </style>
