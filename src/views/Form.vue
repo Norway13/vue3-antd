@@ -1,17 +1,21 @@
 <template>
   <div class="form">
     <BasicForm :formSchema="formSchema" :formData="formData" @submitForm="submitForm"></BasicForm>
+    <FormDialog :dialogConfig="dialogConfig" @close="close" @dialogSubmit="dialogSubmit"></FormDialog>
+    <a-button @click="openDialog">点击弹框</a-button>
   </div>
 </template>
 
 <script>
 import BasicForm from '@/components/Form/index.vue'
+import FormDialog from '@/components/Dialog/FormDialog.vue'
 import { defineComponent, reactive, toRaw } from 'vue';
 
 export default defineComponent({
   name: 'we',
   components: {
-    BasicForm
+    BasicForm,
+    FormDialog
   },
   setup() {
     const formSchema = reactive({
@@ -23,11 +27,11 @@ export default defineComponent({
         },
         formItem: {
           label: '模型编号',
-          rules: [{  
-              min: 3, message:'dfdsjfsd'
+          rules: [{
+            min: 3, message: 'dfdsjfsd'
           },
-          {  
-              max: 7, message:'xcxcxc'
+          {
+            max: 7, message: 'xcxcxc'
           }]
 
         },
@@ -138,12 +142,95 @@ export default defineComponent({
       jg: '',
       cp: ''
     })
-    const submitForm = ()=>{
+    const submitForm = () => {
       console.log('我登入', toRaw(formData))
     }
+
+    const dialogConfig = reactive({
+      visible: false,
+      formSchema: {
+        mxbh: {
+          field: 'mxbh',
+          component: 'Input',
+          colProps: {
+            span: 24,
+          },
+          formItem: {
+            label: '模型编号',
+            rules: [{
+              min: 3, message: 'dfdsjfsd'
+            },
+            {
+              max: 7, message: 'xcxcxc'
+            }]
+
+          },
+          componentProps: {
+            placeholder: '自定义111placeholder',
+
+            onChange: (e) => {
+              console.log('formData', formData)
+              dialogConfig.formSchema.mxmc.hide = true
+              // formSchema.cp.formItem.required = false
+              // formSchema.mxbh.colProps.span = formSchema.mxbh.colProps.span === 12 ? 8 : 12
+              // formSchema.cp.options = [
+              //   { value: '444', label: '444' },
+              //   { value: '555', label: '555' }
+              // ]
+
+            },
+          }
+        },
+        mxmc: {
+          field: 'mxmc',
+          component: 'Input',
+          colProps: {
+            span: 24,
+          },
+          formItem: {
+            label: '模型名称',
+            required: true
+          },
+          componentProps: {
+            placeholder: '自定义placeholder',
+            onChange: (e) => {
+              console.log(e);
+              formSchema.cp.hide = false
+              formSchema.cp.formItem.required = true
+            },
+          }
+        },
+      },
+      formData: {
+        mxbh: '',
+        mxmc: '',
+      },
+      dialog: {
+        title: '12121223',
+        width: 800
+      },
+
+    })
+
+    const openDialog = () => {
+      dialogConfig.visible = true
+    }
+    // 关闭弹框
+    const close = () => {
+      dialogConfig.visible = false
+    }
+    const dialogSubmit = (values) => {
+      console.log('values', values)
+      dialogConfig.visible = false
+    }
     return {
-      formSchema, formData,
-      submitForm
+      formSchema,
+      formData,
+      submitForm,
+      openDialog,
+      dialogConfig,
+      close,
+      dialogSubmit
     }
   }
 

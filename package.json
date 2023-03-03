@@ -17,7 +17,10 @@
     "js-export-excel": "^1.1.4",
     "moment": "^2.29.4",
     "vue": "^3.0.0",
+    "vue-grid-layout": "^3.0.0-beta1",
+    "vue-grid-layout-v3": "^3.0.3",
     "vue-router": "^4.0.0-0",
+    "vue3-draggable-resizable": "^1.6.5",
     "vuex": "^4.0.0-0"
   },
   "devDependencies": {

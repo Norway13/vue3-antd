@@ -29,6 +29,26 @@ const arr = [
     name: '表单basic',
     path: '/form'
   },
+  {
+    name: '表格',
+    path: '/table'
+  },
+  {
+    name: 'describeForm',
+    path: '/describeForm'
+  },
+  {
+    name: 'echarts',
+    path: '/echarts'
+  },
+  {
+    name: 'drag',
+    path: '/drag'
+  },
+  {
+    name: 'page',
+    path: '/page'
+  },
 ]
 </script>
 

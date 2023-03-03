@@ -10,13 +10,38 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/flow",
-    name: "Flow", 
+    name: "Flow",
     component: () => import("../views/Flow.vue"),
   },
   {
     path: "/form",
-    name: "Form", 
+    name: "Form",
     component: () => import("../views/Form.vue"),
+  },
+  {
+    path: "/table",
+    name: "Table",
+    component: () => import("../views/Table.vue"),
+  },
+  {
+    path: "/drag",
+    name: "Drag",
+    component: () => import("../views/drag.vue"),
+  },
+  {
+    path: "/echarts",
+    name: "Echarts",
+    component: () => import("../views/Echarts.vue"),
+  },
+  {
+    path: "/echarts",
+    name: "Echarts",
+    component: () => import("../views/Echarts.vue"),
+  },
+  {
+    path: "/page",
+    name: "Page",
+    component: () => import("../views/Page.vue"),
   },
   {
     path: "/flow1",
@@ -34,6 +59,15 @@ const routes: Array<RouteRecordRaw> = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/Flow2.vue"),
+  },
+  {
+    path: "/describeForm",
+    name: "DescribeForm",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/DescribeForm.vue"),
   },
 ];
 

@@ -4,7 +4,7 @@
     <a-form :model="form" style="padding:10px 10px 0" @finish="onFinish" ref="formRef">
         <a-row :gutter="[16, 0]">
             <a-col v-bind="value.colProps" v-for="(value, key) in formConfig" :key="value"
-                :style="{display: value.hide ? 'none' : 'block' }">
+                :style="{ display: value.hide ? 'none' : 'block' }">
                 <a-form-item v-bind="value.formItem" :name="key">
                     <a-input v-if="value.component === 'Input'" v-model:value="form[key]"
                         v-bind="value.componentProps"></a-input>
@@ -27,7 +27,7 @@
                     </a-tree-select>
                 </a-form-item>
             </a-col>
-            <a-col>
+            <a-col v-if="button">
                 <a-form-item>
                     <a-button type="primary" html-type="submit">查询</a-button>
                     <a-button @click="onReset">重置</a-button>
@@ -38,7 +38,7 @@
     </a-form>
 </template>
 <script>
-import { defineComponent, ref, getCurrentInstance } from 'vue'
+import { defineComponent, ref } from 'vue'
 export default defineComponent({
     name: 'BasicForm',
     props: {
@@ -49,15 +49,19 @@ export default defineComponent({
         formData: {
             type: Object,
             default: () => ({}),
+        },
+        button: {
+            type: Boolean,
+            default: true
         }
     },
     setup(props, context) {
         const formRef = ref()
         // 校验成功
         const onFinish = () => {
+            console.log('onFinish')
             context.emit('submitForm')
         }
-        console.log('getCurrentInstance', getCurrentInstance())
         const onReset = () => {
             console.log('formRef', formRef)
             // console.log('getCurrentInstance',getCurrentInstance())
@@ -67,6 +71,10 @@ export default defineComponent({
             // console.log('ada', ada)
 
         }
+        // //暴露state和play方法
+        // defineExpose({ 
+        //     onFinish
+        // });
 
         return {
             formConfig: props.formSchema,
